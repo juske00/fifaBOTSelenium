@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">selenium </span><span class="s0">import </span><span class="s1">webdriver</span>
+<span class="s0">from </span><span class="s1">selenium.webdriver.common.keys </span><span class="s0">import </span><span class="s1">Keys</span>
+<span class="s0">from </span><span class="s1">selenium.webdriver.support.ui </span><span class="s0">import </span><span class="s1">Select</span>
+<span class="s0">from </span><span class="s1">selenium.webdriver.support </span><span class="s0">import </span><span class="s1">expected_conditions </span><span class="s0">as </span><span class="s1">EC</span>
+<span class="s0">from </span><span class="s1">selenium.webdriver.common.by </span><span class="s0">import </span><span class="s1">By</span>
+<span class="s0">from </span><span class="s1">selenium.webdriver.support.ui </span><span class="s0">import </span><span class="s1">WebDriverWait</span>
+<span class="s0">import </span><span class="s1">time</span>
+<span class="s0">import </span><span class="s1">random</span>
+
+<span class="s1">driver = webdriver.Chrome(</span><span class="s2">&quot;D:/Pobrane/chromedriver.exe&quot;</span><span class="s1">)</span>
+
+<span class="s1">driver.get(</span><span class="s2">&quot;https://www.ea.com/pl-pl/fifa/ultimate-team/web-app/&quot;</span><span class="s1">)</span>
+<span class="s1">time.sleep(</span><span class="s3">5</span><span class="s1">)</span>
+<span class="s1">button = driver.find_element_by_class_name(</span><span class="s2">&quot;btn-standard.call-to-action&quot;</span><span class="s1">)</span>
+<span class="s1">button.click()</span>
+<span class="s1">time.sleep(</span><span class="s3">2</span><span class="s1">)</span>
+<span class="s1">input = driver.find_element_by_name(</span><span class="s2">&quot;email&quot;</span><span class="s1">)</span>
+<span class="s1">input.send_keys(</span><span class="s2">&quot;juske00@gmail.com&quot;</span><span class="s1">)</span>
+<span class="s1">input = driver.find_element_by_name(</span><span class="s2">&quot;password&quot;</span><span class="s1">)</span>
+<span class="s1">input.send_keys(</span><span class="s2">&quot;Juskiewicz1&quot;</span><span class="s1">)</span>
+<span class="s1">button = driver.find_element_by_id(</span><span class="s2">&quot;btnLogin&quot;</span><span class="s1">)</span>
+<span class="s1">button.click()</span>
+<span class="s1">time.sleep(</span><span class="s3">40</span><span class="s1">)</span>
+
+<span class="s1">x = </span><span class="s3">0</span>
+<span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;ut-tab-bar-item.icon-transfer&quot;</span><span class="s1">).click()</span>
+<span class="s1">time.sleep(</span><span class="s3">5</span><span class="s1">)</span>
+<span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;tile.col-1-1.ut-tile-transfer-market&quot;</span><span class="s1">).click()</span>
+
+<span class="s0">while True</span><span class="s1">:</span>
+    <span class="s0">try</span><span class="s1">:</span>
+        <span class="s1">cena = driver.find_elements_by_class_name(</span><span class="s2">&quot;numericInput&quot;</span><span class="s1">)</span>
+        <span class="s0">if </span><span class="s1">x%</span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s1">kwota = </span><span class="s2">&quot;3500&quot;</span>
+            <span class="s1">player = </span><span class="s2">&quot;Davinson&quot;</span>
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s1">kwota = </span><span class="s2">&quot;4000&quot;</span>
+            <span class="s1">player = </span><span class="s2">&quot;Ake&quot;</span>
+        <span class="s1">x = x + </span><span class="s3">1</span>
+        <span class="s1">cena[</span><span class="s3">3</span><span class="s1">].clear()</span>
+        <span class="s1">cena[</span><span class="s3">3</span><span class="s1">].send_keys(kwota)</span>
+        <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;ut-text-input-control&quot;</span><span class="s1">).clear()</span>
+        <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;ut-text-input-control&quot;</span><span class="s1">).send_keys(player)</span>
+        <span class="s1">time.sleep(</span><span class="s3">1</span><span class="s1">)</span>
+        <span class="s1">players = driver.find_element_by_class_name(</span><span class="s2">&quot;btn-text&quot;</span><span class="s1">).click()</span>
+        <span class="s1">time.sleep(random.randint(</span><span class="s3">1</span><span class="s0">, </span><span class="s3">4</span><span class="s1">))</span>
+        <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;btn-standard.call-to-action&quot;</span><span class="s1">).click()</span>
+        <span class="s1">time.sleep(</span><span class="s3">1</span><span class="s1">)</span>
+        <span class="s0">try</span><span class="s1">:</span>
+            <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;btn-standard.buyButton.currency-coins&quot;</span><span class="s1">).click()</span>
+            <span class="s1">time.sleep(</span><span class="s3">1</span><span class="s1">)</span>
+            <span class="s0">if </span><span class="s1">driver.find_elements_by_class_name(</span><span class="s2">&quot;btn-text&quot;</span><span class="s1">)[</span><span class="s3">3</span><span class="s1">].text == </span><span class="s2">&quot;PRZEJDŹ&quot;</span><span class="s1">:</span>
+                <span class="s1">driver.find_elements_by_class_name(</span><span class="s2">&quot;btn-text&quot;</span><span class="s1">)[</span><span class="s3">3</span><span class="s1">].click()</span>
+                <span class="s1">time.sleep(random.randint(</span><span class="s3">1</span><span class="s0">, </span><span class="s3">2</span><span class="s1">))</span>
+                <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;btn-standard.section-header-btn.mini.call-to-action&quot;</span><span class="s1">).click()</span>
+                <span class="s1">time.sleep(random.randint(</span><span class="s3">1</span><span class="s0">, </span><span class="s3">2</span><span class="s1">))</span>
+                <span class="s1">driver.find_elements_by_class_name(</span><span class="s2">&quot;btn-text&quot;</span><span class="s1">)[</span><span class="s3">12</span><span class="s1">].click()</span>
+                <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;ut-navigation-button-control&quot;</span><span class="s1">).click()</span>
+            <span class="s0">elif </span><span class="s1">driver.find_elements_by_class_name(</span><span class="s2">&quot;btn-text&quot;</span><span class="s1">)[</span><span class="s3">2</span><span class="s1">].text == </span><span class="s2">&quot;OK&quot;</span><span class="s1">:</span>
+                <span class="s1">driver.find_elements_by_class_name(</span><span class="s2">&quot;btn-text&quot;</span><span class="s1">)[</span><span class="s3">2</span><span class="s1">].click()</span>
+                <span class="s1">time.sleep(random.randint(</span><span class="s3">1</span><span class="s0">, </span><span class="s3">2</span><span class="s1">))</span>
+                <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;ut-navigation-button-control&quot;</span><span class="s1">).click()</span>
+            <span class="s0">else</span><span class="s1">:</span>
+                <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;ut-navigation-button-control&quot;</span><span class="s1">).click()</span>
+        <span class="s0">except</span><span class="s1">:</span>
+            <span class="s1">time.sleep(random.randint(</span><span class="s3">1</span><span class="s0">, </span><span class="s3">3</span><span class="s1">))</span>
+            <span class="s1">driver.find_element_by_class_name(</span><span class="s2">&quot;ut-navigation-button-control&quot;</span><span class="s1">).click()</span>
+    <span class="s0">except</span><span class="s1">:</span>
+        <span class="s0">pass</span>
+</pre>
+</body>
+</html>
